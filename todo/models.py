@@ -23,5 +23,4 @@ class Item (models.Model):
     def __str__(self):
         return self.item_text
     
-    #calss method , instance , static
     
