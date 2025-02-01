@@ -7,7 +7,7 @@ class ItemInline(admin.TabularInline):  # Inline representation for related Item
     extra = 1  
 
 class UsersAdmin(admin.ModelAdmin):
-    list_display = ("username", "get_items")  # Show username and related items in list view
+    list_display = ("username", "get_items")  
     inlines = [ItemInline]  # Embed ItemInline in UserName admin page
     
     def get_items(self, obj):

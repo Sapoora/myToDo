@@ -20,7 +20,7 @@ def signup(request):
                 return render(request, 'todo/success.html', {'username': username})
     else:
         form = UserNameForm()
-    return render(request, 'todo/signup.html', {'form': form , 'error_message': error_message})
+    return render(request, 'todo/signup.html', {'form': form, 'error_message': error_message})
 
 def login(request):
     error_message = None
