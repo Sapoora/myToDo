@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add</title>
+</head>
+<body>
+    <h2>{{ username }} write an item to add to your todo list:</h2>
+    <form action="{% url 'todo:add-item' username=username %}" method="POST">
+        {% csrf_token %}
+        <label for="inputString">Enter text:</label>
+        <input type="text" id="inputString" name="inputString" required>
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>

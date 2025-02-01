@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if error_message %}
+        <span style="color: red;"><div class="error-message">{{ error_message }}</div></span>
+        {% endif %}
+        <button type="submit">Log In</button>
+        <button><a href="{% url 'todo:signup' %}">signup</a></button>
+
+    </form>
+</body>
+</html>

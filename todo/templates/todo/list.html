@@ -1,0 +1,31 @@
+<fieldset>
+    <legend><h1>Todo List</h1></legend>
+
+    {% if username.item.all %}
+        <ul style="list-style-type: none; padding: 0;">
+            {% for item in username.item.all %}
+                <li>
+                    <form action="{% url 'todo:toggle_status' item.id %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <input type="checkbox" 
+                               name="item" 
+                               id="item{{ forloop.counter }}" 
+                               value="{{ item.id }}" 
+                               {% if item.is_done %}checked{% endif %}>
+                        <label for="item{{ forloop.counter }}" 
+                               {% if item.is_done %}style="text-decoration: line-through;"{% endif %}>
+                            {{ item.item_text }}
+                        </label>
+                        <button type="submit" style="display: none;">Submit</button>  <!-- Hidden submit button -->
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No items yet. Click the Add button to create some!</p>
+    {% endif %}
+</fieldset>
+
+<form action="{% url 'todo:add-item' username=username.username %}" method="get">
+    <button type="submit">Add</button>
+</form>
