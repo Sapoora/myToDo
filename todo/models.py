@@ -1,7 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
-class UserName (models.Model):
-    username = models.CharField(max_length=50, unique=True)
+class User (AbstractUser): ####
 
     def __str__(self):
         return self.username
@@ -11,7 +11,7 @@ class UserName (models.Model):
 
 
 class Item (models.Model):
-    username = models.ForeignKey(UserName, on_delete=models.CASCADE, related_name='item')
+    username = models.ForeignKey(User, on_delete=models.CASCADE, related_name='items')
     item_text = models.CharField(max_length=300)
     is_done = models.BooleanField(default=0)
     pub_date = models.DateTimeField("date created", auto_now_add=True)

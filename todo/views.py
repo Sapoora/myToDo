@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .forms import UserNameForm
-from .models import UserName , Item
+from .models import User , Item
 from django.shortcuts import get_object_or_404, render, redirect
 
 def init(request):
@@ -13,10 +13,10 @@ def signup(request):
         if form.is_valid():
             username = form.cleaned_data['username']
             
-            if UserName.objects.filter(username=username).exists():
+            if User.objects.filter(username=username).exists():
                 error_message = "This username has already been taken.Please login."
             else:
-                UserName.objects.create(username=username)
+                User.objects.create(username=username)
                 return render(request, 'todo/success.html', {'username': username})
     else:
         form = UserNameForm()
@@ -28,7 +28,7 @@ def login(request):
         form = UserNameForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
-            if UserName.objects.filter(username=username).exists():
+            if User.objects.filter(username=username).exists():
                 return render(request, 'todo/success.html', {'username': username})
             else:
                 error_message = "This username doesn't exist. Please signup."
@@ -38,11 +38,11 @@ def login(request):
     return render(request, 'todo/login.html', {'form': form , 'username': username , 'error_message': error_message})
 
 def list(request , username):
-    username = get_object_or_404(UserName, username=username)
+    username = get_object_or_404(User, username=username)
     return render(request, 'todo/list.html', {'username': username })
 
 def add_item(request , username):
-    user = get_object_or_404(UserName, username=username)
+    user = get_object_or_404(User, username=username)
     if request.method == 'POST':
         item_text = request.POST.get('inputString')
         if item_text:
