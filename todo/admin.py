@@ -16,7 +16,7 @@ class UsersAdmin(admin.ModelAdmin):
     get_items.short_description = "Items"
 
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ("username", "item_text", "is_done", "pub_date") 
+    list_display = ("user", "item_text", "status", "pub_date") 
 
 admin.site.register(User, UsersAdmin)
 admin.site.register(Item, ItemAdmin)

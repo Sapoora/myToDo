@@ -5,7 +5,7 @@
 </head>
 <body>
     <h1>ID Submitted Successfully</h1>
-    <p>Your UserName: {{ username }}</p>
-    <button><a href="{% url 'todo:list' username %}">show my todo list</a></button>
+    <p>Your UserName: {{ user }}</p>
+    <button><a href="{% url 'todo:list' user %}">show my todo list</a></button>
     </body>
 </html>

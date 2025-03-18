@@ -1,22 +1,18 @@
 <fieldset>
     <legend><h1>Todo List</h1></legend>
 
-    {% if username.item.all %}
+    {% if items %}
         <ul style="list-style-type: none; padding: 0;">
-            {% for item in username.item.all %}
+            {% for item in items %}
                 <li>
                     <form action="{% url 'todo:toggle_status' item.id %}" method="post" style="display: inline;">
                         {% csrf_token %}
-                        <input type="checkbox" 
-                               name="item" 
-                               id="item{{ forloop.counter }}" 
-                               value="{{ item.id }}" 
-                               {% if item.is_done %}checked{% endif %}>
-                        <label for="item{{ forloop.counter }}" 
-                               {% if item.is_done %}style="text-decoration: line-through;"{% endif %}>
-                            {{ item.item_text }}
+                        <label for="status_{{ item.id }}">
+                            <input type="checkbox" id="status_{{ item.id }}" name="status" value="done" 
+                                {% if item.status == 'done' %}checked{% endif %}
+                                onchange="this.form.submit()"> 
+                            {{ item.item_text }} ({{ item.get_status_display }})
                         </label>
-                        <button type="submit" style="display: none;">Submit</button>  <!-- Hidden submit button -->
                     </form>
                 </li>
             {% endfor %}
@@ -26,6 +22,6 @@
     {% endif %}
 </fieldset>
 
-<form action="{% url 'todo:add-item' username=username.username %}" method="get">
+<form action="{% url 'todo:add-item' user=user %}" method="get">
     <button type="submit">Add</button>
 </form>
