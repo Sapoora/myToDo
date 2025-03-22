@@ -25,3 +25,8 @@
 <form action="{% url 'todo:add-item' user=user %}" method="get">
     <button type="submit">Add</button>
 </form>
+
+<form action="{% url 'todo:logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+</form>

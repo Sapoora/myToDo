@@ -10,10 +10,7 @@ class User (AbstractUser):
     def add_item (self, item_text):
         Item.objects.create(user=self, item_text=item_text)
 
-
 class Item (models.Model):
-
-        
     user = models.ForeignKey("todo.User", on_delete=models.CASCADE, related_name='items')
     item_text = models.CharField(max_length=300)
     pub_date = models.DateTimeField("date created", auto_now_add=True)
@@ -24,7 +21,6 @@ class Item (models.Model):
         ('done', 'Done'),
     ]
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='not done')
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         state_names = [choice[0] for choice in Item.STATUS_CHOICES]        
@@ -34,7 +30,6 @@ class Item (models.Model):
         self.machine.add_transition('edit', 'review', 'in progress')
         self.machine.add_transition('end reveiw', 'review', 'done')
         self.machine.add_transition('reset', '*', 'not done')
-
 
     def set_done(self):
         self.is_done = True
