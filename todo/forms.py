@@ -1,5 +1,6 @@
 from django import forms
 
 class UserNameForm(forms.Form):
-    username = forms.CharField(label='Enter your ID', max_length=50)
+    user = forms.CharField(label='Enter your ID', max_length=50)
+    password = forms.CharField(label='Enter your password', max_length=50, widget=forms.PasswordInput)
 

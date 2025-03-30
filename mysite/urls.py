@@ -24,3 +24,8 @@ urlpatterns = [
     path("todo/", include("todo.urls")),
     path("", views.init)
 ]
+
+
+urlpatterns+=[
+    path('api-auth/', include('rest_framework.urls')),
+]

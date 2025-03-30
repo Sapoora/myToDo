@@ -3,8 +3,21 @@
 <head>
     <title>Login</title>
 </head>
+
 <body>
     <h1>Login</h1>
+
+    {% if messages %}
+    <span style="color: green;">
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div></span>
+    {% endif %}
+
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
